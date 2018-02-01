@@ -7,4 +7,4 @@
 <img src="https://github.com/ainiyiwan/OSChina-v2.9.0/blob/master/png/OSChina.gif"/>
 </div>
 
-更多功能请点击**[这里](https://raw.githubusercontent.com/ainiyiwan/OSChina-v2.9.0/master/app-oschina-debug.apk)**自行下载安装apk运行查看
+**更多功能请点击[这里](https://raw.githubusercontent.com/ainiyiwan/OSChina-v2.9.0/master/app-oschina-debug.apk)自行下载安装apk运行查看**

@@ -6,8 +6,8 @@
 - AppCrashHandler
 - AccountHelper
 - TDevice 超级多有用的工具类 自行查看
-- 
-- 
+- DialogHelper 通用的对话框
+- SimplexToast(将一个吐司单例化，并且作防止频繁点击的处理。)
 - 
 - 
 - 

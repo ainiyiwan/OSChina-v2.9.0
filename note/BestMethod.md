@@ -1,6 +1,6 @@
 # 漂亮的常用方法
 
-### 清除app缓存 AppContext
+### 1.清除app缓存 AppContext
 ```java
  /**
      * 清除app缓存
@@ -43,7 +43,7 @@
     }
 ```
 
-### 判断当前版本是否兼容目标版本的方法 AppContext
+### 2.判断当前版本是否兼容目标版本的方法 AppContext
 ```java
 public static boolean isMethodsCompat(int VersionCode) {
         int currentVersion = android.os.Build.VERSION.SDK_INT;

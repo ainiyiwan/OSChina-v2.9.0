@@ -1,2 +1,15 @@
 # 感兴趣并且要立即研究的类
-## LaunchActivity
+- LaunchActivity
+- AppCrashHandler(Demo测试是否管用)
+- AccountHelper(研究别人家的登录状态保存)
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 

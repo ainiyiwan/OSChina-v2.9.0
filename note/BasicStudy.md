@@ -176,4 +176,4 @@ public ProgressDialog showWaitDialog(int resid) {
  // 通过注解绑定控件
 ButterKnife.bind(this);
 ```
-## 
+## 新版BaseActivity由于太过庞大，单开一篇，见[这里](https://github.com/ainiyiwan/OSChina-v2.9.0/blob/master/note/BaseActivity.md)

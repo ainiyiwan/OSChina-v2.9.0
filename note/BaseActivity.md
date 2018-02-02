@@ -112,3 +112,105 @@ protected abstract Type getType();
 protected abstract BaseRecyclerAdapter<T> getRecyclerAdapter();
 ```
 #### 请关注我下面这段言论，所谓的封装其实就和大多数中国的父母一样，为什么这么说呢，大多数父母，在有生之年，拼了命的给孩子买房买车，这就等于父类帮你实现了许多方法，但是吃喝拉撒这种事还是要你自己来做的，所以，就抽象出来，交给你来实现，但是呢，我们每个人只能有一个父类，所以如果你个人能力强，可以多做点，父类少封装点，如果你没什么能力，或者是富二代，那么你要做的就很少了，因为父类都帮你做了，哎，伟大的父母。
+### AccountBaseActivity
+#### 关于实现抽象方法感想
+```java
+@Override
+protected int getContentView() {
+    return 0;
+}
+```
+**这个Activity不是抽象的所以必须实现父类的抽象方法，但是又不能确定布局，所以直接返回零，让子类实现，关于子类和父类这件事，实现肯定是以子类为准，父类希望孩子平平淡淡，子类希望自己飞黄腾达，理想肯定是由子类决定**
+#### 封装一个LocalBroadcastManager
+```java
+protected LocalBroadcastManager mManager;
+ protected boolean sendLocalReceiver() {
+        if (mManager != null) {
+            Intent intent = new Intent();
+            intent.setAction(ACTION_ACCOUNT_FINISH_ALL);
+            return mManager.sendBroadcast(intent);
+        }
+
+        return false;
+    }
+
+    /**
+     * register localReceiver
+     */
+    private void registerLocalReceiver() {
+        if (mManager == null)
+            mManager = LocalBroadcastManager.getInstance(this);
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(ACTION_ACCOUNT_FINISH_ALL);
+        if (mReceiver == null)
+            mReceiver = new BroadcastReceiver() {
+                @Override
+                public void onReceive(Context context, Intent intent) {
+                    String action = intent.getAction();
+                    if (ACTION_ACCOUNT_FINISH_ALL.equals(action)) {
+                        finish();
+                    }
+                }
+            };
+        mManager.registerReceiver(mReceiver, filter);
+    }
+```
+#### 封装其他常用方法
+```java
+protected void hideKeyBoard(IBinder windowToken) {
+    InputMethodManager inputMethodManager = this.mInputMethodManager;
+    if (inputMethodManager == null) return;
+    boolean active = inputMethodManager.isActive();
+    if (active) {
+        inputMethodManager.hideSoftInputFromWindow(windowToken, 0);
+    }
+}
+
+/**
+ * request network error
+ *
+ * @param throwable throwable
+ */
+protected void requestFailureHint(Throwable throwable) {
+    if (throwable != null) {
+        throwable.printStackTrace();
+    }
+    showToastForKeyBord(R.string.request_error_hint);
+}
+```
+### BackActivity
+#### 帮助子类实现一些方法
+```java
+@Override
+protected void initWindow() {
+    super.initWindow();
+    mToolBar = (Toolbar) findViewById(R.id.toolbar);
+    if (mToolBar != null) {
+        setSupportActionBar(mToolBar);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeButtonEnabled(false);
+        }
+    }
+}
+
+@Override
+public boolean onSupportNavigateUp() {
+    finish();
+    return super.onSupportNavigateUp();
+}
+```
+### DetailActivity(BackActivity的子类)
+**大部分不懂封装思想的人，看到这个类肯定很困惑，其实我也是，因为这已经算是顶级的封装了，后期慢慢体会**
+#### 封装了一个框架，就剩中间一个空布局叫个子类来填充
+```java
+protected abstract DetailFragment getDetailFragment();
+```
+### ShareActivity(BackActivity的子类)
+**之前自己一直想封装一个分享，看来有门道，可以参照这个来搞**
+#### 封装了一个框架，就剩中间一个空布局叫个子类来填充
+```java
+protected abstract ShareFragment getShareFragment();
+```
+## 关于Fragment的封装见
